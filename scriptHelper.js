@@ -27,7 +27,8 @@ function validateInput(testInput) {
 };
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) { //what does this list represent?
-   
+    formData = document.getElementById("testForm");
+    console.log(formData)
 }
 
 async function myFetch() {

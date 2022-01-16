@@ -17,8 +17,33 @@ describe("validateInput", function(){
 
 describe("formSubmission", function() {
 
-    it("will take in a document parameter and strings representing the pilot, co-pilot, fuel level, and cargo mass", function(){
-        
+    it("will take in a document parameter and strings representing the form fields", function(){
+
     });
+
+    /*describe("will update the list of shuttle requirements ", function(){
+        
+
+        it("pilotStatus and copilotStatus will include their name", function(){
+        
+        });
+
+        it("If the user submits a fuel level that is too low updates faultyItems", function(){
+        
+        });
+
+        it("If the user submits a fuel level that is too low updates launchStatus", function(){
+        
+        });
+
+        it("will update pilotStatus and copilotStatus to include their name", function(){
+        
+        });
+
+        it("If the shuttle is ready to launch updates launchStatus", function() {
+        
+        });
+
+    });*/
 
 });
