@@ -14,3 +14,11 @@ describe("validateInput", function(){
     });
 
 });
+
+describe("formSubmission", function() {
+
+    it("will take in a document parameter and strings representing the pilot, co-pilot, fuel level, and cargo mass", function(){
+        
+    });
+
+});

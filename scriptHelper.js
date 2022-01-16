@@ -26,7 +26,7 @@ function validateInput(testInput) {
     };
 };
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) { //what does this list represent?
    
 }
 
