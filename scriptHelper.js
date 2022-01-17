@@ -45,6 +45,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     
 }*/
 
+//TODO: some weird shit whenever updating from bad fuel/cargo numbers
 function formSubmission() {
     //prevent page from reloading
     event.preventDefault(); //event is deprecated, but it is working and required to prevent page from reloading
@@ -73,6 +74,8 @@ function formSubmission() {
             document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch"
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
             document.getElementById("launchStatus").style.color = "red"
+        } else {
+            document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"
         }
     
         //update if cargo mass is too high
@@ -81,29 +84,24 @@ function formSubmission() {
             document.getElementById("cargoStatus").innerHTML = "Cargo mass too high for launch"
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
             document.getElementById("launchStatus").style.color = "red"
+        } else {
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch"
         }
 
         //update if ready for launch
         if (Number(fuelLevel > 10000) && Number(cargoMass) < 10000) {
             document.getElementById("launchStatus").innerHTML = "Shuttle is ready for Launch"
-            document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"
-            document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch"
             document.getElementById("launchStatus").style.color = "green"
         }
     }
 }
 
 async function myFetch() {
-    let planetsReturned;
-
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        response.json().then(function(json) {
-            console.log(json);
-        })
-    });
-
-    return planetsReturned;
-}
+    const response = await fetch("https://handlers.education.launchcode.org/static/planets.json")
+    const planets = await response.json();
+    const planet = pickPlanet(planets)
+    addDestinationInfo(planet);
+};
 
 function pickPlanet(planets) {
     let selectedPlanet = planets[Math.floor(Math.random() * planets.length)];
