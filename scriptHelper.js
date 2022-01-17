@@ -27,8 +27,27 @@ function validateInput(testInput) {
 };
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) { //what does this list represent?
-    formData = document.getElementById("testForm");
-    console.log(formData)
+    
+}
+
+function formSubmission() {
+    //get values
+    pilot = document.getElementById("pilotName").value;
+    copilot = document.getElementById("copilotName").value;
+    fuelLevel = document.getElementById("fuelLevel").value;
+    cargoMass = document.getElementById("cargoMass").value;
+
+    console.log([pilot, copilot, fuelLevel, cargoMass]);
+
+    //validation
+    //TODO add prevenDefault()'s
+    if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
+        window.alert("Please enter a valid name for pilot and copilot");
+        event.preventDefault();
+    } else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoMass) === "Not a Number") {
+        window.alert("Please enter a number for fuel level and cargo mass");
+        event.preventDefault();
+    }
 }
 
 async function myFetch() {
