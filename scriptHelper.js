@@ -92,6 +92,7 @@ function formSubmission() {
         if (Number(fuelLevel > 10000) && Number(cargoMass) < 10000) {
             document.getElementById("launchStatus").innerHTML = "Shuttle is ready for Launch"
             document.getElementById("launchStatus").style.color = "green"
+            document.getElementById("faultyItems").style.visibility = "hidden"
         }
     }
 }
