@@ -55,7 +55,6 @@ function formSubmission() {
     copilot = document.getElementById("copilotName").value;
     fuelLevel = document.getElementById("fuelLevel").value;
     cargoMass = document.getElementById("cargoMass").value;
-
     //validation
     if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoMass) === "Empty") {
         window.alert("Please complete all 4 fields");
@@ -64,13 +63,16 @@ function formSubmission() {
     } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
         window.alert("Please enter a valid name for pilot and copilot")    
     } else {
+
+        //show form data
+        document.getElementById("faultyItems").style.visibility = "visible";
+
         //updating pilot and copilot names
         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`
         document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot} is ready for launch`
 
         //update if fuel level is too low
-        if (Number(fuelLevel < 10000)) {
-            document.getElementById("faultyItems").style.visibility = "visible"
+        if (Number(fuelLevel <= 10000)) {
             document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch"
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
             document.getElementById("launchStatus").style.color = "red"
@@ -80,7 +82,6 @@ function formSubmission() {
     
         //update if cargo mass is too high
         if (Number(cargoMass) > 10000) {
-            document.getElementById("faultyItems").style.visibility = "visible"
             document.getElementById("cargoStatus").innerHTML = "Cargo mass too high for launch"
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
             document.getElementById("launchStatus").style.color = "red"
@@ -92,7 +93,6 @@ function formSubmission() {
         if (Number(fuelLevel > 10000) && Number(cargoMass) < 10000) {
             document.getElementById("launchStatus").innerHTML = "Shuttle is ready for Launch"
             document.getElementById("launchStatus").style.color = "green"
-            document.getElementById("faultyItems").style.visibility = "hidden"
         }
     }
 }
