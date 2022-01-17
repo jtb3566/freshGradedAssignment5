@@ -26,27 +26,56 @@ function validateInput(testInput) {
     };
 };
 
+/* this is the template for formSubmission provided with the lesson. I was not sure how to proceed. 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) { //what does this list represent?
     
-}
+}*/
 
 function formSubmission() {
+    //prevent page from reloading
+    event.preventDefault(); //event is deprecated, but it is working and required to prevent page from reloading
+
     //get values
     pilot = document.getElementById("pilotName").value;
     copilot = document.getElementById("copilotName").value;
     fuelLevel = document.getElementById("fuelLevel").value;
     cargoMass = document.getElementById("cargoMass").value;
 
-    console.log([pilot, copilot, fuelLevel, cargoMass]);
-
     //validation
-    //TODO add prevenDefault()'s
-    if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
-        window.alert("Please enter a valid name for pilot and copilot");
-        event.preventDefault();
+    if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoMass) === "Empty") {
+        window.alert("Please complete all 4 fields");
     } else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoMass) === "Not a Number") {
         window.alert("Please enter a number for fuel level and cargo mass");
-        event.preventDefault();
+    } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
+        window.alert("Please enter a valid name for pilot and copilot")    
+    } else {
+        //updating pilot and copilot names
+        document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`
+        document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot} is ready for launch`
+
+        //update if fuel level is too low
+        if (Number(fuelLevel < 10000)) {
+            document.getElementById("faultyItems").style.visibility = "visible"
+            document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch"
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
+            document.getElementById("launchStatus").style.color = "red"
+        }
+    
+        //update if cargo mass is too high
+        if (Number(cargoMass) > 10000) {
+            document.getElementById("faultyItems").style.visibility = "visible"
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass too high for launch"
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
+            document.getElementById("launchStatus").style.color = "red"
+        }
+
+        //update if ready for launch
+        if (Number(fuelLevel > 10000) && Number(cargoMass) < 10000) {
+            document.getElementById("launchStatus").innerHTML = "Shuttle is ready for Launch"
+            document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch"
+            document.getElementById("launchStatus").style.color = "green"
+        }
     }
 }
 
